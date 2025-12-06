@@ -14,7 +14,9 @@ const router = createRouter({
       meta: { title: '自强Studio' },
     },
     { path: '/about', redirect: { path: '/', hash: '#about' }, meta: { title: '自强Studio' } },
+    { path: '/timeline', redirect: { path: '/', hash: '#timeline' }, meta: { title: '自强Studio' } },
     { path: '/product', redirect: { path: '/', hash: '#product' }, meta: { title: '自强Studio' } },
+    { path: '/activity', redirect: { path: '/', hash: '#activity' }, meta: { title: '自强Studio' } },
     { path: '/department', redirect: { path: '/', hash: '#department' }, meta: { title: '自强Studio' } },
     { path: '/join', redirect: { path: '/', hash: '#join' }, meta: { title: '自强Studio' } },
     // keep deep detail route for department details page if navigated directly

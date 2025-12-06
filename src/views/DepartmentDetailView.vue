@@ -183,8 +183,8 @@ const toggleCard = (cardType) => {
 
 // 返回首页部门区块，避免历史与滚动异常
 const goBack = () => {
-  window.__hashSuppressUntil = Date.now() + 800
-  router.push({ name: 'all-in-one', hash: '#department' })
+  // router.push({ name: 'all-in-one', hash: '#department' })
+  router.back()
 }
 
 // 页面加载时的处理

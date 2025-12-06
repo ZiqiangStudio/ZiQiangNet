@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="product">
         <!-- 背景大字 PRODUCTS（参考图2样式） -->
         <div class="products-bg-text1" aria-hidden="true">PRODUCTS</div>
         <div class="products-bg-text2" aria-hidden="true">PRODUCTS</div>
@@ -72,48 +72,7 @@
             </div>
             <div class="line2"><img src="/img/products/line2.png" alt=""></div>
 
-        </div>
-
-        <!-- 新增的滚动卡片页面 -->
-        <div class="product-page">
-            <!-- 左侧滚动卡片区域 -->
-             <div class="bg"><img src="/img/activity/activitybg.png" alt=""></div>
-            <div class="left-section-new">
-                <div class="background-text1">ACTIVITIES</div>
-                <div class="cards-container" ref="cardsContainer">
-                    <div v-for="(product, index) in productsData.technologyProducts" :key="product.name"
-                        class="product-card" :class="{ active: selectedIndex === index }"
-                        @click="selectProductNew(index)">
-                            <img :src="fixImg(firstImg(product.image))" :alt="product.name" />
-                    </div>
-                </div>
-                <div class="background-text2">ACTIVITIES</div>
-
-            </div>
-
-            <!-- 右侧内容展示区域 -->
-            <div class="right-section-new">
-                <div class="content-wrapper">
-                    <!-- 主标题 -->
-                    <h1 class="main-title">{{ selectedProductNew.name }}</h1>
-
-                    <!-- 描述文本：蓝色说明段落 -->
-                    <div class="description-text-new rich">
-                        {{ selectedProductNew.introduction }}
-                    </div>
-
-                    <!-- 相机展示区域 -->
-                    <div class="camera-area">
-                        <div class="camera-mockup">
-                            <div class="camera-screen" :style="{ backgroundImage: 'url(' + fixImg(secondImg(selectedProductNew.image) || firstImg(selectedProductNew.image)) + ')' }"></div>
-                            <img class="camera-frame" src="/img/activity/camera.png" alt="camera frame" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+        </div> 
     </div>
 </template>
 
@@ -225,7 +184,7 @@ onUnmounted(() => {
 }
 
 body,
-#app {
+#product {
     font-family: 'Microsoft YaHei', Arial, sans-serif;
     min-height: 100vh;
     position: relative;

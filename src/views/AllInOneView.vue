@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import HomeView from './HomeView.vue'
 import AboutView from './AboutView.vue'
+import TimelineView from './TimelineView.vue'
+import ActivityView from './ActivityView.vue'
 import ProductView from './ProductView.vue'
 import DepartmentView from './Departmentview.vue'
 import JoinView from './JoinView.vue'
 import { onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
+import router from '../router'
 
 let observer: IntersectionObserver | null = null
 let rafId: number | null = null
@@ -15,8 +15,6 @@ let scrollRafId: number | null = null
 
 function updateHash(id: string) {
   const newHash = `#${id}`
-  const suppressUntil = (window as any).__hashSuppressUntil as number | undefined
-  if (suppressUntil && Date.now() < suppressUntil) return
   if (window.location.hash === newHash) return
   // Use replace to avoid polluting back stack while scrolling
   router.replace({ hash: newHash })
@@ -62,9 +60,11 @@ onMounted(() => {
 
   // Fallback: scroll listener using viewport center to decide active section
   const onScroll = () => {
-    if (scrollRafId != null) return
-    scrollRafId = requestAnimationFrame(() => {
-      scrollRafId = null
+    // 防抖
+    if( scrollRafId != null ) {
+      clearTimeout(scrollRafId)
+    }
+    scrollRafId = setTimeout(() => {
       const viewportCenter = window.scrollY + window.innerHeight * 0.5
       let bestId = ''
       let bestDist = Number.POSITIVE_INFINITY
@@ -78,7 +78,8 @@ onMounted(() => {
         }
       }
       if (bestId) updateHash(bestId)
-    })
+      scrollRafId = null
+    }, 100);
   }
   window.addEventListener('scroll', onScroll, { passive: true })
 
@@ -121,8 +122,14 @@ onUnmounted(() => {
     <section id="about" class="section">
       <AboutView />
     </section>
+    <section id="timeline" class="section">
+      <TimelineView />
+    </section>
     <section id="product" class="section">
       <ProductView />
+    </section>
+    <section id="activity" class="section">
+      <ActivityView />
     </section>
     <section id="department" class="section">
       <DepartmentView />

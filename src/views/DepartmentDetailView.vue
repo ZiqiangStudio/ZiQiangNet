@@ -141,7 +141,7 @@ import productsData from '../productsData'
 const route = useRoute()
 const router = useRouter()
 const loading = ref(true)
-const activeCard = ref('achievements') // 默认展开第一个卡片
+const activeCard = ref('') // 默认展开第一个卡片
 
 // 从路由参数获取部门信息
 const departmentName = computed(() => route.params.departmentName)

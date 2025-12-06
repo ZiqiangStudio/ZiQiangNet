@@ -538,11 +538,13 @@ body,
 
 .search-bar {
     padding: 20px;
+    padding-bottom: 10px;
     background: white;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid #e0e0e0;
+    border-right: 12px solid #3DB9E8;
+    border-left: 12px solid #3DB9E8;
 }
 
 .search-icon {
@@ -593,7 +595,6 @@ body,
     overflow-y: auto;
     background: white;
     border: solid #16ACE2;
-    border-radius: 10px;
     border-width: 0 12px 12px 12px;
 }
 /* 右侧搜索结果滚动条为蓝色 */
@@ -858,19 +859,19 @@ align-items: center;
 .camera-mockup {
     position: absolute;
     right: 2vw;
-    bottom: -10vh;
+    bottom: -7vh;
     width: 40vw;
     height: 40vh;
     transform: rotate(-4deg);
-    filter: drop-shadow(0 16px 30px rgba(0,0,0,0.25));
 }
 
 .camera-screen {
     position: absolute;
-    /* 根据相机边框透明区域调整以下数值以适配屏幕区域 */
-    top: 10px;
+    top: 0;
+    left: 0;
+    /* 与相机边框左上角对齐，尺寸一致 */
     width: 80%;
-    height: 80%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     border-radius: 12px;
@@ -879,11 +880,10 @@ align-items: center;
 
 .camera-frame {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
     pointer-events: none;
     z-index: 2;
 }

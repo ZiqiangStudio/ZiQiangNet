@@ -44,9 +44,8 @@
 
 .home-bg1 {
   position: absolute;
-  top: -5vh;
   left: 0;
-  width: 60%;
+  height: 110%;
 }
 
 .home-bg2 {

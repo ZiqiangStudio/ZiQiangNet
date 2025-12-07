@@ -6,7 +6,7 @@ import ActivityView from './ActivityView.vue'
 import ProductView from './ProductView.vue'
 import DepartmentView from './Departmentview.vue'
 import JoinView from './JoinView.vue'
-import { onMounted, onUnmounted } from 'vue'
+import { onActivated, onDeactivated } from 'vue'
 import router from '../router'
 
 let observer: IntersectionObserver | null = null
@@ -20,7 +20,7 @@ function updateHash(id: string) {
   router.replace({ hash: newHash })
 }
 
-onMounted(() => {
+onActivated(() => {
   const sectionEls = Array.from(document.querySelectorAll<HTMLElement>('main.all-in-one > section'))
   if (!sectionEls.length) return
 
@@ -61,7 +61,7 @@ onMounted(() => {
   // Fallback: scroll listener using viewport center to decide active section
   const onScroll = () => {
     // 防抖
-    if( scrollRafId != null ) {
+    if (scrollRafId != null) {
       clearTimeout(scrollRafId)
     }
     scrollRafId = setTimeout(() => {
@@ -92,7 +92,7 @@ onMounted(() => {
   ; (window as any).__allInOneScrollRemover = () => window.removeEventListener('scroll', onScroll)
 })
 
-onUnmounted(() => {
+onDeactivated(() => {
   if (observer) {
     observer.disconnect()
     observer = null

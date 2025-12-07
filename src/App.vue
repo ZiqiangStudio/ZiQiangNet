@@ -24,7 +24,12 @@ onUnmounted(() => {
 <template>
   <Header />
   <div class="snap-root">
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <KeepAlive>
+        <component v-if="$route.meta.keepAlive" :is="Component" />
+      </KeepAlive>
+      <component v-if="!$route.meta.keepAlive" :is="Component" />
+    </RouterView>
   </div>
   <div v-if="isTooNarrow" class="narrow-overlay" role="dialog" aria-live="polite">
     <div class="narrow-card">
@@ -35,12 +40,13 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.body{
+.body {
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
-  overflow-x: hidden; /* 禁止水平滚动条 */
+  overflow-x: hidden;
+  /* 禁止水平滚动条 */
   font-size: 1vw;
 }
 </style>
@@ -64,7 +70,7 @@ onUnmounted(() => {
   background: #ffffff;
   border-radius: 12px;
   padding: 16px 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
   text-align: center;
   max-width: 86vw;
 }
@@ -86,6 +92,7 @@ html, body{
   height: 100%;
   scroll-snap-type: y mandatory;
   scroll-padding-top: 0;
+  scroll-behavior: smooth;
 }
 body{
   margin: 0;
@@ -93,10 +100,11 @@ body{
 }
 
 /* Reusable scroll-snap helpers for any route/component */
-.snap-container{
+.snap-container {
   scroll-snap-type: y mandatory;
 }
-.snap-section{
+
+.snap-section {
   min-height: 100vh;
   scroll-snap-align: start;
   scroll-snap-stop: always;

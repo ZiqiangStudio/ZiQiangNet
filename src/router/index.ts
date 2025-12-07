@@ -11,7 +11,7 @@ const router = createRouter({
       path: '/',
       name: 'all-in-one',
       component: AllInOneView,
-      meta: { title: '自强Studio' },
+      meta: { title: '自强Studio', keepAlive: true },
     },
     { path: '/about', redirect: { path: '/', hash: '#about' }, meta: { title: '自强Studio' } },
     { path: '/timeline', redirect: { path: '/', hash: '#timeline' }, meta: { title: '自强Studio' } },
@@ -28,15 +28,17 @@ const router = createRouter({
     },
   ],
   scrollBehavior(to, from, savedPosition) {
+    console.log('to:', to)
+    if (savedPosition) {
+      console.log('savedPosition:', savedPosition)
+      return { ...savedPosition, behavior: 'instant' }
+    }
     if (to.hash) {
       return {
         el: to.hash,
         behavior: 'smooth',
         top: 0,
       }
-    }
-    if (savedPosition) {
-      return savedPosition
     }
     return { top: 0, behavior: 'smooth' }
   },
